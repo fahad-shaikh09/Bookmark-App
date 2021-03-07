@@ -89,7 +89,7 @@ export default function Home() {
 
 
 
-      <tbody>
+     {data &&  <tbody>
         {data.bookmarks.map((bookmark, index) => {
           return (
             <tr key={index}>
@@ -100,7 +100,7 @@ export default function Home() {
           )
         })}
       </tbody>
-
+}
     </table>
 
 
