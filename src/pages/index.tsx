@@ -11,7 +11,6 @@ export const GET_BOOKMARKS = gql`
     }
   }
 `
-
 export const ADD_BOOKMARK = gql`
   mutation addBookmark($title: String!, $url: String!, $description: String!){
     addBookmark(title: $title, url: $url, description: $description){
@@ -22,37 +21,15 @@ export const ADD_BOOKMARK = gql`
 }
 `
 
-
-
 export default function Home() {
 
   const [title, setTitle] = useState("")
   const [url, setUrl] = useState("")
   const [description, setDescription] = useState("")
-  const [updated, setUpdated] = useState(false)
 
-
-  // const handleSubmit = async () => {
-  // console.log("To:", toField);
-  // console.log("From:", fromField);
-  // console.log("Message:", message);
-  // console.log("title:", title)
-  // console.log("url:", url)
-  // console.log("description:", description)
-
-  // addBookmark({
-  //   variables: {
-  //     title,
-  //     url,
-  //     description,
-  //   },
-  //   refetchQueries: [{ query: GET_BOOKMARKS }]
-  // })
-  // }
-
-
-
-  const submitBookmark = async () => {
+  const submitBookmark = async (e) => {
+    e.preventDefault();
+    console.log("submitBookmark is running")
     const result = await addBookmark({
       variables: {
         title: title,
@@ -61,11 +38,14 @@ export default function Home() {
       },
       refetchQueries: [{ query: GET_BOOKMARKS }]
     })
-
-    console.log("Result in submitBookmark func >>>>>>>>>>>>>:", result)
+    setUrl("");
+    setDescription("");
+    setTitle("");
+    // console.log("Title in submitBookmark >>>>>>>>>>>>>>>:", title)
+    // console.log("Description in submitBookmark >>>>>>>>>>>>>>>:", description)
+    // console.log("URL in submitBookmark >>>>>>>>>>>>>>>:", url)
+    console.log("Result in submitBookmark Func >>>>>>>>>>>:", result.data)
   }
-
-
 
 
   const { error, loading, data } = useQuery(GET_BOOKMARKS)
@@ -78,6 +58,8 @@ export default function Home() {
   if (loading) return <h1>Loading...</h1>
   if (error) return <h1> {error}</h1>
 
+
+
   // var arrayLength = data.getAllLollies.length
 
   return <div className="container">
@@ -87,7 +69,7 @@ export default function Home() {
       Enter Description: <input type="text" name="description" value={description} onChange={e => setDescription(e.target.value)} /> <br></br><br></br>
       Enter URL: <input type="text" name="url" value={url} onChange={e => setUrl(e.target.value)} /><br></br>
       <br></br>
-      <button onClick={() => submitBookmark()} >Add Bookmark</button>
+      <button onClick={(e) => submitBookmark(e)} >Add Bookmark</button>
 
     </form>
   </div>
