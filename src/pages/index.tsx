@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { useQuery, useMutation, gql } from "@apollo/client"
-
+import "./index.css"
 
 export const GET_BOOKMARKS = gql`
   {
@@ -72,13 +72,10 @@ export default function Home() {
       <button onClick={(e) => submitBookmark(e)} >Add Bookmark</button>
       <br></br>
       <br></br>
-      <hr></hr>
     </form>
 
 
-
-
-    <table>
+    <table className="table">
       <thead>
         <tr >
           <th>TITLE</th>
