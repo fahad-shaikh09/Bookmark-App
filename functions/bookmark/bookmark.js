@@ -30,7 +30,7 @@ const resolvers = {
     hello: () => 'Hello, world!',
     bookmarks: async () => {
       try {
-        var client = new faunadb.Client({ secret: "fnAEDm_BQ-ACCaigjivZ26OoIw_KxTZsznVtCs8e" })
+        var client = new faunadb.Client({ secret: process.env.SERVER_SECRET })
         const result = await client.query(
           q.Map(
             q.Paginate(q.Match(q.Index('Bookmarks'))),
@@ -58,7 +58,7 @@ const resolvers = {
       // console.log("Description in addBookmark >>>>>>>>>>>>>>>:", description )
       // console.log("URL in addBookmark >>>>>>>>>>>>>>>:", url )
       try {
-        var client = new faunadb.Client({ secret: "fnAEDm_BQ-ACCaigjivZ26OoIw_KxTZsznVtCs8e" })
+        var client = new faunadb.Client({ secret: process.env.SERVER_SECRET })
         var result = await client.query(
           q.Create(
             q.Collection("Bookmarks"),

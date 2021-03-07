@@ -70,7 +70,38 @@ export default function Home() {
       Enter URL: <input type="text" name="url" value={url} onChange={e => setUrl(e.target.value)} /><br></br>
       <br></br>
       <button onClick={(e) => submitBookmark(e)} >Add Bookmark</button>
-
+      <br></br>
+      <br></br>
+      <hr></hr>
     </form>
+
+
+
+    {data.bookmarks.map((bookmark,index) => {
+      return (
+        <table key={index}>
+          <thead>
+            <tr >
+              <th>TITLE</th>
+              <th>URL</th>
+              <th>DESCRIPTION</th>
+            </tr>
+          </thead>
+
+
+
+          <tbody>
+            <tr >
+              <td>{bookmark.title}</td>
+              <td>{bookmark.url}</td>
+              <td>{bookmark.description}</td>
+            </tr>
+          </tbody>
+        </table>
+      )
+    })
+    }
+
+
   </div>
 }
