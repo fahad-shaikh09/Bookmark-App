@@ -67,7 +67,7 @@ export default function Home() {
     <form>
       Enter Title: <input type="text" name="title" value={title} onChange={e => setTitle(e.target.value)} /> <br></br><br></br>
       Enter Description: <input type="text" name="description" value={description} onChange={e => setDescription(e.target.value)} /> <br></br><br></br>
-      Enter URL: <input type="text" name="url" value={url} onChange={e => setUrl(e.target.value)} /><br></br>
+      Enter URL: <input type="url" name="url" value={url} onChange={e => setUrl(e.target.value)} /><br></br>
       <br></br>
       <button onClick={(e) => submitBookmark(e)} >Add Bookmark</button>
       <br></br>
@@ -77,30 +77,31 @@ export default function Home() {
 
 
 
-    {data.bookmarks.map((bookmark,index) => {
-      return (
-        <table key={index}>
-          <thead>
-            <tr >
-              <th>TITLE</th>
-              <th>URL</th>
-              <th>DESCRIPTION</th>
-            </tr>
-          </thead>
+
+    <table>
+      <thead>
+        <tr >
+          <th>TITLE</th>
+          <th>URL</th>
+          <th>DESCRIPTION</th>
+        </tr>
+      </thead>
 
 
 
-          <tbody>
-            <tr >
+      <tbody>
+        {data.bookmarks.map((bookmark, index) => {
+          return (
+            <tr key={index}>
               <td>{bookmark.title}</td>
               <td>{bookmark.url}</td>
               <td>{bookmark.description}</td>
             </tr>
-          </tbody>
-        </table>
-      )
-    })
-    }
+          )
+        })}
+      </tbody>
+
+    </table>
 
 
   </div>
